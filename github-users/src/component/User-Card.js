@@ -1,14 +1,16 @@
 import React from 'react';
 
 const UserCard = props => {
-    const totalFollowers = 0;
+    let totalFollowers = 0;
 
     const getTopThree = () => {
-        props.userInfo.followersData.map(follower => {
+
+        totalFollowers = props.userInfo.followersData.length - 3;
+        return props.userInfo.followersData.map(follower => {
             return(
                 <div>
-                    <img src={follower.avatar_url} />
-                    <p>{follower.login}</p>
+                    <img src={follower.avatar_url} alt='Follower'/>
+                    <h1>{follower.login}</h1>
                 </div>
             )
         })
@@ -17,10 +19,12 @@ const UserCard = props => {
     return(
         <div>
             <img src={props.userInfo.data.avatar_url} alt='User' />
-            <p>{props.userInfo.data.login}</p>
+            <h1>{props.userInfo.data.login}</h1>
             <div>
                 {/* <p></p>
                 <p>{props.userInfo.followersData}</p> */}
+                {getTopThree()}
+                {totalFollowers > 3 ? <p>{totalFollowers} More Followers</p> : null}
             </div>
         </div>
     )
