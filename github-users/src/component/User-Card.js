@@ -42,7 +42,7 @@ const UserCard = props => {
         return props.userInfo.followersData.map((follower, index) => {
             if(index < 3){
                     return(
-                    <FollowerContainer>
+                    <FollowerContainer key={index}>
                         <FollowerImg src={follower.avatar_url} alt='Follower'/>
                         <p>{follower.login}</p>
                     </FollowerContainer>
