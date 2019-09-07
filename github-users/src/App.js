@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import UserCard from './component/User-Card';
+import { GitHubCalendar } from 'github-calendar';
+import UserForm from './component/User-Form';
 
 class App extends React.Component {
 
@@ -14,7 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    axios.get('https://api.github.com/users/prototype109')
+    axios.get('https://api.github.com/users/jacobAngulo')
       .then(res => {
         console.log('Result: ', res);
         this.setState({data: res.data});
@@ -34,12 +36,26 @@ class App extends React.Component {
         .catch(err => {
           console.log('Error followers: ', err);
         });
+
+        //GitHubCalendar('.calendar', `${this.state.data.login}`);
     }
+  }
+
+  getUser = (user) => {
+    axios.get(`https://api.github.com/users/${user}`)
+      .then(res => {
+        console.log('Result: ', res);
+        this.setState({data: res.data});
+      })
+      .catch(err => {
+        console.log('Err: ', err);
+      });
   }
 
   render(){
     return (
       <div className="App">
+        <UserForm getUser={this.getUser} />
         <UserCard userInfo={this.state} />
       </div>
     );
