@@ -7,6 +7,23 @@ class UserForm extends React.Component{
         this.state = {
             gitUser: ''
         }
+        this.Form = styled.form`
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            margin-top: 10px;
+            width: 230px;
+        `;
+        this.Button = styled.button`
+            margin: 0 auto;
+            min-width: 100px;
+            height: 50px;
+            font-size: 2.5rem;
+        `;
+        this.Input = styled.input`
+            height: 38px;
+            font-size: 1.5rem;
+        `;
     }
 
     handleChange = (e) => {
@@ -21,14 +38,14 @@ class UserForm extends React.Component{
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit} >
-                <input type='text' 
+            <this.Form onSubmit={this.handleSubmit} >
+                <this.Input type='text' 
                        name='username' 
                        placeholder='github username' 
                        value={this.state.gitUser} 
                        onChange={this.handleChange} />
-                <button type='submit'>submit</button>
-            </form>
+                <this.Button type='submit'>submit</this.Button>
+            </this.Form>
         )
     }
 }
